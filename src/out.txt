@@ -1,0 +1,54 @@
+[1;40;32mWelcome to Richman![0m
+cmd summary(Shortcuts)
+roll: go random 1-6 steps.
+go N: go N steps.
+tool: display and use tool
+info: query player N's information.
+quitgame: player quit game.
+exitgame: end the game.
+[1;40;32mA[0m[1;40;0m1[0m[1;40;0m2[0m[1;40;0m3[0m[1;40;0mH[0m[1;40;0m5[0m[1;40;0m6[0m[1;40;0m7[0m
+[1;40;0m#[0m      [1;40;0m2[0m
+[1;40;0m#[0m      [1;40;0m2[0m
+[1;40;0m#[0m      [1;40;0m2[0m
+[1;40;0m@[0m[1;40;0m3[0m[1;40;0m3[0m[1;40;0m3[0m[1;40;0mH[0m[1;40;0m3[0m[1;40;0m3[0m[1;40;0m@[0m
+[1;40;32mA Tubo[0m         id=0    pos=0       money=1000     tool=0     land=0  
+[1;40;32mA Tubo[0m[1;40;32m>[0mg 1
+A Tubo go 1 steps.
+land worth is $100, Do you want to buy land? Y-N
+[1;40;31mS[0m[1;40;32mA[0m[1;40;0m2[0m[1;40;0m3[0m[1;40;0mH[0m[1;40;0m5[0m[1;40;0m6[0m[1;40;0m7[0m
+[1;40;0m#[0m      [1;40;0m2[0m
+[1;40;0m#[0m      [1;40;0m2[0m
+[1;40;0m#[0m      [1;40;0m2[0m
+[1;40;0m@[0m[1;40;0m3[0m[1;40;0m3[0m[1;40;0m3[0m[1;40;0mH[0m[1;40;0m3[0m[1;40;0m3[0m[1;40;0m@[0m
+[1;40;31mSun Xiaomei[0m    id=1    pos=0       money=1000     tool=0     land=0  
+[1;40;31mSun Xiaomei[0m[1;40;31m>[0mg 2
+Sun Xiaomei go 2 steps.
+land worth is $100, Do you want to buy land? Y-N
+[1;40;34mQ[0m[1;40;32mA[0m[1;40;31mS[0m[1;40;0m3[0m[1;40;0mH[0m[1;40;0m5[0m[1;40;0m6[0m[1;40;0m7[0m
+[1;40;0m#[0m      [1;40;0m2[0m
+[1;40;0m#[0m      [1;40;0m2[0m
+[1;40;0m#[0m      [1;40;0m2[0m
+[1;40;0m@[0m[1;40;0m3[0m[1;40;0m3[0m[1;40;0m3[0m[1;40;0mH[0m[1;40;0m3[0m[1;40;0m3[0m[1;40;0m@[0m
+[1;40;34mQian Furen[0m     id=2    pos=0       money=1000     tool=0     land=0  
+[1;40;34mQian Furen[0m[1;40;34m>[0mg 3
+Qian Furen go 3 steps.
+land worth is $100, Do you want to buy land? Y-N
+[1;40;33mJ[0m[1;40;32mA[0m[1;40;31mS[0m[1;40;34mQ[0m[1;40;0mH[0m[1;40;0m5[0m[1;40;0m6[0m[1;40;0m7[0m
+[1;40;0m#[0m      [1;40;0m2[0m
+[1;40;0m#[0m      [1;40;0m2[0m
+[1;40;0m#[0m      [1;40;0m2[0m
+[1;40;0m@[0m[1;40;0m3[0m[1;40;0m3[0m[1;40;0m3[0m[1;40;0mH[0m[1;40;0m3[0m[1;40;0m3[0m[1;40;0m@[0m
+[1;40;33mJin Beibei[0m     id=3    pos=0       money=1000     tool=0     land=0  
+[1;40;33mJin Beibei[0m[1;40;33m>[0mg 4
+Jin Beibei go 4 steps.
+Id:0 G:tool name:Godwealth       price:500 
+Id:1 B:tool name:Block           price:200 
+Id:2 C:tool name:Control dice    price:200 
+Do you want to buy tools? Y-n
+[1;40;0ms[0m[1;40;32mA[0m[1;40;31mS[0m[1;40;34mQ[0m[1;40;33mJ[0m[1;40;0m5[0m[1;40;0m6[0m[1;40;0m7[0m
+[1;40;0m#[0m      [1;40;0m2[0m
+[1;40;0m#[0m      [1;40;0m2[0m
+[1;40;0m#[0m      [1;40;0m2[0m
+[1;40;0m@[0m[1;40;0m3[0m[1;40;0m3[0m[1;40;0m3[0m[1;40;0mH[0m[1;40;0m3[0m[1;40;0m3[0m[1;40;0m@[0m
+[1;40;32mA Tubo[0m         id=0    pos=1       money=1000     tool=0     land=0  
+[1;40;32mA Tubo[0m[1;40;32m>[0me 
