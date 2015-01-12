@@ -14,7 +14,7 @@ int main()
 	return 0;
 }
 #endif
-//³õÊ¼»¯¸ÃidÍæ¼Ò
+//åˆå§‹åŒ–è¯¥idç©å®¶
 st_player * init_player(int id)
 {
 	st_player *p=malloc(sizeof(st_player));
@@ -29,7 +29,7 @@ st_player * init_player(int id)
 	init_player_tool(p);
 	return p;
 }
-//Ïú»ÙÍæ¼Ò
+//é”€æ¯ç©å®¶
 void deinit_player(st_player **p)
 {
 	if(*p==NULL) return;
@@ -37,52 +37,52 @@ void deinit_player(st_player **p)
 	*p=NULL;	
 }
 
-//»ñÈ¡Íæ¼ÒÃû×Ö linuxÏÂÖÕ¶ËÔİÊ±²»ÄÜÏÔÊ¾ÖĞÎÄ
+//è·å–ç©å®¶åå­— linuxä¸‹ç»ˆç«¯æš‚æ—¶ä¸èƒ½æ˜¾ç¤ºä¸­æ–‡
 char * get_player_name(st_player *p)
 {
 	return p->name;
 }
 
-//»ñÈ¡Íæ¼Òid
+//è·å–ç©å®¶id
 int get_player_id(st_player *p)
 {
 	return p->id;
 }
 
-//»ñÈ¡Íæ¼ÒµØÍ¼ÉÏµÄÎ»ÖÃ
+//è·å–ç©å®¶åœ°å›¾ä¸Šçš„ä½ç½®
 void get_player_pos(st_player *p,int *x,int *y)
 {
 	*x=p->x;
 	*y=p->y;
 }
 
-//ÉèÖÃÍæ¼ÒÎ»ÖÃ
+//è®¾ç½®ç©å®¶ä½ç½®
 void set_player_pos(st_player *p,int x,int y)
 {
 	p->x=x;
 	p->y=y;	
 }
 
-//»ñÈ¡Íæ¼Ò½ğÇ®Êı
+//è·å–ç©å®¶é‡‘é’±æ•°
 int get_player_money(st_player *p)
 {
 	return p->money;	
 }
 
 
-//ÉèÖÃÍæ¼Ò½ğÇ®
+//è®¾ç½®ç©å®¶é‡‘é’±
 void set_player_money(st_player *p,int money)
 {
 	p->money=money;
 }
 
-//»ñÈ¡Íæ¼ÒµØÍ¼ÉÏµÄ±êÖ¾
+//è·å–ç©å®¶åœ°å›¾ä¸Šçš„æ ‡å¿—
 char get_player_symbol(st_player *p)
 {
 	return p->symbol;	
 }
 
-//»ñÈ¡Íæ¼ÒÏà¶ÔÏà¶ÔÆğµãµÄ²½Êı
+//è·å–ç©å®¶ç›¸å¯¹ç›¸å¯¹èµ·ç‚¹çš„æ­¥æ•°
 int get_player_step(st_player *p)
 {
 	return p->step;
@@ -93,32 +93,32 @@ void set_player_step(st_player *p,int step)
 	p->step=step;	
 }
 
-//»ñÈ¡Íæ¼ÒÑÕÉ«
+//è·å–ç©å®¶é¢œè‰²
 e_color get_player_color(st_player *p)
 {
 	return p->color;	
 }
-//»ñÈ¡Íæ¼ÒµÀ¾ßÊıÁ¿
+//è·å–ç©å®¶é“å…·æ•°é‡
 int get_player_tlnum(st_player *p)
 {
 	return p->tool_num;
 }
-//ÉèÖÃÍæ¼ÒµÀ¾ßÊıÁ¿
+//è®¾ç½®ç©å®¶é“å…·æ•°é‡
 void set_player_tlnum(st_player *p,int num)
 {
 	p->tool_num=num;
 }
-//»ñÈ¡µÚindex¸öµÀ¾ßµÄid
+//è·å–ç¬¬indexä¸ªé“å…·çš„id
 int get_player_tln(st_player *p,int index)
 {
 	return (p->tool_table)[index];
 }
-//ÉèÖÃµÚindex¸öµÀ¾ßµÄid
+//è®¾ç½®ç¬¬indexä¸ªé“å…·çš„id
 void set_player_tln(st_player *p,int index,int id)
 {
 	(p->tool_table)[index]=id;
 }
-//Ìí¼ÓÒ»¸öµÀ¾ß µÀ¾ßtableÖĞidÎªMAX_TOOL_NUM±íÊ¾¿ÕÎ»ÖÃ
+//æ·»åŠ ä¸€ä¸ªé“å…· é“å…·tableä¸­idä¸ºMAX_TOOL_NUMè¡¨ç¤ºç©ºä½ç½®
 void add_player_tool(st_player *p,int id)
 {
 	if(get_player_tlnum(p) == MAX_TOOL_NUM) return;
@@ -150,7 +150,7 @@ void init_player_tool(st_player *p)
 		set_player_tln(p,i,MAX_TOOL_NUM);
 
 }
-//´òÓ¡Íæ¼ÒĞÅÏ¢
+//æ‰“å°ç©å®¶ä¿¡æ¯
 void print_player_info(st_player *p)
 {
 	//int x,y;

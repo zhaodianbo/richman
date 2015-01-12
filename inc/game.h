@@ -3,7 +3,7 @@
 #include"map.h"
 #include"player.h"
 #include"util.h"
-#if 0	//²âÊÔĞ¡µØÍ¼
+#if 0	//æµ‹è¯•å°åœ°å›¾
 #ifdef WIDTH
 #undef WIDTH
 #define WIDTH WIDTH_S
@@ -16,24 +16,24 @@
 #define LAND_NUM (WIDTH*2+(HEIGHT-2)*2)
 typedef struct land{
 	int x,y;	//pos
-	int price;					//ÍÁµØµÄ¼Û¸ñ
-	st_player *p_player;		//ÍÁµØµÄËùÓĞÕß
-	e_color owner_color;		//ÍÁµØËùÓĞÕßµÄÑÕÉ«
-	House_type level;			//ÍÁµØµÄµÈ¼¶	
-	e_color color;				//ÍÁµØµÄÁÙÊ±ÑÕÉ« ºÍÕ¾ÔÚÉÏÃæµÄÍæ¼ÒÑÕÉ«Ò»ÖÂ
-	int tool_n;					//ÍÁµØÉÏµÀ¾ßµÄÊıÁ¿
-	int tools[MAX_TOOL_NUM];	//ÍÁµØÉÏµÄµÀ¾ß
-	char symbol;				//ÍÁµØÁÙÊ±ÏÔÊ¾µÄ·ûºÅ
+	int price;					//åœŸåœ°çš„ä»·æ ¼
+	st_player *p_player;		//åœŸåœ°çš„æ‰€æœ‰è€…
+	e_color owner_color;		//åœŸåœ°æ‰€æœ‰è€…çš„é¢œè‰²
+	House_type level;			//åœŸåœ°çš„ç­‰çº§	
+	e_color color;				//åœŸåœ°çš„ä¸´æ—¶é¢œè‰² å’Œç«™åœ¨ä¸Šé¢çš„ç©å®¶é¢œè‰²ä¸€è‡´
+	int tool_n;					//åœŸåœ°ä¸Šé“å…·çš„æ•°é‡
+	int tools[MAX_TOOL_NUM];	//åœŸåœ°ä¸Šçš„é“å…·
+	char symbol;				//åœŸåœ°ä¸´æ—¶æ˜¾ç¤ºçš„ç¬¦å·
 	
 }st_land_info;
 
 typedef struct game{
-	st_player *p_player_tab[MAX_PLAYER_NUM];	//Íæ¼Òtable ÉùÃ÷³ÉÖ¸Õë»¹ÊÇ½á¹¹ÌåºÃÄØ£¿
-	st_map_info *p_map;							//µØÍ¼Ö¸Õë
-	st_land_info p_land[LAND_NUM];				//µØ¿é½á¹¹Ìå
-	int player_num;								//Íæ¼ÒÊı ==1ÔòÍæ¼ÒÊ¤Àû ÓÎÏ·½áÊø
-	int id;										//p_player_tabÖĞµÄË÷Òı Ö¸Ïòµ±Ç°Íæ¼Ò
-	int my_turnflag;							//ÍøÂç°æÖĞµÄ±êÖ¾ 1:my turn 0:others turn
+	st_player *p_player_tab[MAX_PLAYER_NUM];	//ç©å®¶table å£°æ˜æˆæŒ‡é’ˆè¿˜æ˜¯ç»“æ„ä½“å¥½å‘¢ï¼Ÿ
+	st_map_info *p_map;							//åœ°å›¾æŒ‡é’ˆ
+	st_land_info p_land[LAND_NUM];				//åœ°å—ç»“æ„ä½“
+	int player_num;								//ç©å®¶æ•° ==1åˆ™ç©å®¶èƒœåˆ© æ¸¸æˆç»“æŸ
+	int id;										//p_player_tabä¸­çš„ç´¢å¼• æŒ‡å‘å½“å‰ç©å®¶
+	int my_turnflag;							//ç½‘ç»œç‰ˆä¸­çš„æ ‡å¿— 1:my turn 0:others turn
 }st_game;
 
 #ifndef MAX_TOOL_NUM
@@ -41,17 +41,17 @@ typedef struct game{
 #endif
 #define SHOP 'H'
 typedef struct tool{
-	char symbol;	//±êÖ¾
-	char *name;		//Ãû×Ö
+	char symbol;	//æ ‡å¿—
+	char *name;		//åå­—
 	int id;			//id
-	int price;		//¼Û¸ñ
-	e_color color;	//ÑÕÉ«
-	void (*usetool)(st_game *,int);	//Ê¹ÓÃµÀ¾ß
-	void (*meettool)(st_game *,int); //ÔÚÍÁµØÉÏÓöµ½µÀ¾ßµÄĞ§¹û ±ÈÈçÓöµ½Â·ÕÏ
+	int price;		//ä»·æ ¼
+	e_color color;	//é¢œè‰²
+	void (*usetool)(st_game *,int);	//ä½¿ç”¨é“å…·
+	void (*meettool)(st_game *,int); //åœ¨åœŸåœ°ä¸Šé‡åˆ°é“å…·çš„æ•ˆæœ æ¯”å¦‚é‡åˆ°è·¯éšœ
 }st_tool;
 
 
-/*Ê¹ÓÃ¾²Ì¬±íÈ¡´ú¹ı¶àµÄif-else?*/
+/*ä½¿ç”¨é™æ€è¡¨å–ä»£è¿‡å¤šçš„if-else?*/
 enum land_owner_type{Na=0,Owner,Other,Toolshop};
 typedef enum land_owner_type e_LandOwnerType;
 
@@ -63,7 +63,7 @@ struct land_ftbl_s{
 };
 typedef struct land_ftbl_s	land_ftbl_t;
 
-//´Ógame½á¹¹ÌåÖĞÖ±½Ó»ñÈ¡µ±Ç°Íæ¼ÒµÄĞÅÏ¢
+//ä»gameç»“æ„ä½“ä¸­ç›´æ¥è·å–å½“å‰ç©å®¶çš„ä¿¡æ¯
 int  get_p_money(st_game *p);
 int  get_p_id(st_game *p);
 int  get_p_step(st_game *p);
@@ -75,21 +75,21 @@ char *get_p_name(st_game *p);
 e_color get_p_color(st_game *p);
 void set_p_step(st_game *p,int step);
 
-//´òÓ¡µØÍ¼Ïà¹Øº¯Êı
+//æ‰“å°åœ°å›¾ç›¸å…³å‡½æ•°
 int  update_map(st_game *p,int n);
 void print_game_map(st_game *p);
 void print_name(st_game *p);
 void print_land(st_game *p,int );
 void print_p_info(st_game *game,int index);
 
-//³õÊ¼»¯
+//åˆå§‹åŒ–
 void init_land(st_land_info (*p_land)[]);
 void init_shop(st_map_info *map);
 void deinit_game(st_game **p);
 st_game * init_game(int player_num);
 
 
-//land½á¹¹ÌåÏà¹Øº¯Êı
+//landç»“æ„ä½“ç›¸å…³å‡½æ•°
 int  get_land_price(st_land_info *land);
 int  get_land_tlnum(st_land_info *land);
 void set_land_player(st_land_info *land,st_player *p_player);
@@ -106,7 +106,7 @@ House_type get_land_level(st_land_info *land);
 e_LandOwnerType whose_land(st_game *game,st_land_info *land);
 void add_land_tool(st_land_info *land,int id);
 
-//game½á¹¹ÌåÏà¹Øº¯Êı
+//gameç»“æ„ä½“ç›¸å…³å‡½æ•°
 int  get_game_pnum(st_game *p);
 int  get_game_id(st_game *p);
 void set_game_id(st_game *p,int id);
@@ -116,7 +116,7 @@ st_player *get_player(st_game *p);
 st_player *get_playern(st_game *p,int id);
 st_land_info *get_game_land(st_game *p,int );
 
-//cmdÏà¹Øº¯Êı
+//cmdç›¸å…³å‡½æ•°
 int  buy_land(st_game *game,st_land_info *land);
 int  upgrade_house(st_game *game,st_land_info *land);
 int  is_yes();

@@ -2,13 +2,13 @@
 #define MAP_H
 
 #define WIDTH 8
-#define HEIGHT 5 //map和value也要跟着修改
+#define HEIGHT 5 //map鍜寁alue涔熻璺熺潃淇敼
 #define WIDTH_S 7
-#define HEIGHT_S 4 //map和value也要跟着修改
+#define HEIGHT_S 4 //map鍜寁alue涔熻璺熺潃淇敼
 typedef struct {
-	char map[HEIGHT][WIDTH];	//地图信息
-	int (*value)[WIDTH];		//地块初始价值？
-	int x,y;					//当前游标位置cur
+	char map[HEIGHT][WIDTH];	//鍦板浘淇℃伅
+	int (*value)[WIDTH];		//鍦板潡鍒濆浠峰�硷紵
+	int x,y;					//褰撳墠娓告爣浣嶇疆cur
 }st_map_info;
 
 typedef enum House{Level_0=0,Level_1,Level_2,Level_3}House_type;

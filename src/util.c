@@ -94,7 +94,7 @@ void print_line(char c,int num)
 		printf("%c",c);
 }
 
-//ÔÚÆÁÄ»ÖĞ¼ä´òÓ¡
+//åœ¨å±å¹•ä¸­é—´æ‰“å°
 /*ccccstrcccc*/
 void print_bar(char *str,char c,e_color color)
 {
@@ -116,7 +116,7 @@ void print_bar(char *str,char c,e_color color)
 
 int six_rand()
 {
-	/*nºÜĞ¡»òºÜ´óÊ±£¬ÓÃ%Éú³ÉµÄËæ»úÊı²¢²»·Ç³£Ëæ»ú*/
+	/*nå¾ˆå°æˆ–å¾ˆå¤§æ—¶ï¼Œç”¨%ç”Ÿæˆçš„éšæœºæ•°å¹¶ä¸éå¸¸éšæœº*/
 #if 0
 	static  int n=0;
 	if(n==0)
@@ -128,11 +128,11 @@ int six_rand()
 #endif	
 	int range=6,ret;
 
-	/*½«Ëæ»úÊıÇø¼ä·Ö¸î³ÉÏàÍ¬´óĞ¡µÄÍ°*/
+	/*å°†éšæœºæ•°åŒºé—´åˆ†å‰²æˆç›¸åŒå¤§å°çš„æ¡¶*/
 	unsigned int bucket_size=RAND_MAX/range;
 	srand((unsigned) time(NULL));
 
-	/*µÃµ½Í°µÄ±àºÅ£¬Çø¼äÍâµÄ±àºÅÉáÆú*/
+	/*å¾—åˆ°æ¡¶çš„ç¼–å·ï¼ŒåŒºé—´å¤–çš„ç¼–å·èˆå¼ƒ*/
 	do ret=rand()/bucket_size+1;
 	while(ret > range);
 	return ret;
@@ -146,7 +146,7 @@ void *is_timeout(void *arg)
 	printf("enter:");
 	for(i=9;i>=0;i--)
 	{
-		printf("\033[2;11H");//°Ñ¹â±êÒÆ¶¯µ½µÚ2ĞĞµÚ11ÁĞ
+		printf("\033[2;11H");//æŠŠå…‰æ ‡ç§»åŠ¨åˆ°ç¬¬2è¡Œç¬¬11åˆ—
 		printf("%d\n",i);
 		printf("\033[3;7H");
 		//c=getc(stdin);
@@ -154,7 +154,7 @@ void *is_timeout(void *arg)
 		//printf("\033[2J");
 		sleep(1);
 	}
-	printf("\033[2J");//ÇåÆÁ
+	printf("\033[2J");//æ¸…å±
 }
 #if 0
 #include <unistd.h>

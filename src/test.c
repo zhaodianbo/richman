@@ -32,15 +32,15 @@ void *is_timeout(void *arg)
 	char c;
 	int num=0;
 	printf("enter:\n");
-	printf("\033[s");			//±£´æ¹â±ê
-	printf("\033[?25l");		//Òş²Ø¹â±ê
-	system("stty raw -echo");	//±ä³Éµ¥¸ö×Ö·ûÊäÈëÄ£Ê½  Ô­Ä£Ê½ÎªĞĞÊäÈëÄ£Ê½
+	printf("\033[s");			//ä¿å­˜å…‰æ ‡
+	printf("\033[?25l");		//éšè—å…‰æ ‡
+	system("stty raw -echo");	//å˜æˆå•ä¸ªå­—ç¬¦è¾“å…¥æ¨¡å¼  åŸæ¨¡å¼ä¸ºè¡Œè¾“å…¥æ¨¡å¼
 	set_disp_mode(STDIN_FILENO,0);
 	g_tstart=1;
 	#if 0
 	for(i=9;i>=0;i--)
 	{
-		//printf("\033[2;11H");//°Ñ¹â±êÒÆ¶¯µ½µÚ2ĞĞµÚ11ÁĞ
+		//printf("\033[2;11H");//æŠŠå…‰æ ‡ç§»åŠ¨åˆ°ç¬¬2è¡Œç¬¬11åˆ—
 		//if(i==5)
 		printf("\033[2;11H%d\n\033[u",i);
 		//printf("\033[u");
@@ -53,15 +53,15 @@ void *is_timeout(void *arg)
 	while(g_tstart);
 	system("stty -raw -echo");
 	set_disp_mode(STDIN_FILENO,1);
-	printf("\033[2J");		//ÇåÆÁ
-	printf("\033[?25h");	//ÏÔÊ¾¹â±ê
+	printf("\033[2J");		//æ¸…å±
+	printf("\033[?25h");	//æ˜¾ç¤ºå…‰æ ‡
 	g_timeout=1;
 }
 
 int main()
 {
 
-/*Êı×éÖ¸ÕëºÍÖ¸ÕëÊı×é*/
+/*æ•°ç»„æŒ‡é’ˆå’ŒæŒ‡é’ˆæ•°ç»„*/
 #if 0
 	int a[5]={1,2,3,4,5};	
 	int *p1=a;
@@ -84,7 +84,7 @@ int main()
 #endif
 
 
-/*getc²âÊÔ »º³åÇøµÄ´óĞ¡?*/
+/*getcæµ‹è¯• ç¼“å†²åŒºçš„å¤§å°?*/
 #if 0
 	int i=2;
 	int n=0;
@@ -99,7 +99,7 @@ int main()
 		printf("%d",cmd_line[n]);
 #endif
 
-/*·Ç×èÈû·½Ê½¶ÁÈ¡ÖÕ¶Ë*/
+/*éé˜»å¡æ–¹å¼è¯»å–ç»ˆç«¯*/
 #if 1
 
 #if 0	
@@ -116,9 +116,9 @@ tryagain:
 	}
 	write(STDOUT_FILENO,buf,n);
 #endif //
-#endif //·Ç×èÈû¶Á
+#endif //éé˜»å¡è¯»
 
-/*²âÊÔµ¹¼ÆÊ±*/
+/*æµ‹è¯•å€’è®¡æ—¶*/
 #if 1
 
 	char buf[10];
@@ -137,9 +137,9 @@ tryagain:
 	char c;
 	int num=0;
 	printf("enter:\n");
-	printf("\033[s");			//±£´æ¹â±ê
-	printf("\033[?25l");		//Òş²Ø¹â±ê
-	system("stty raw echo");	//±ä³Éµ¥¸ö×Ö·ûÊäÈëÄ£Ê½  Ô­Ä£Ê½ÎªĞĞÊäÈëÄ£Ê½
+	printf("\033[s");			//ä¿å­˜å…‰æ ‡
+	printf("\033[?25l");		//éšè—å…‰æ ‡
+	system("stty raw echo");	//å˜æˆå•ä¸ªå­—ç¬¦è¾“å…¥æ¨¡å¼  åŸæ¨¡å¼ä¸ºè¡Œè¾“å…¥æ¨¡å¼
 	//set_disp_mode(STDIN_FILENO,0);
 	g_tstart=1;
 
@@ -188,13 +188,13 @@ tryagain:
 
 		system("stty -raw echo");
 	//set_disp_mode(STDIN_FILENO,1);
-	printf("\033[2J");		//ÇåÆÁ
-	printf("\033[?25h");	//ÏÔÊ¾¹â±ê
+	printf("\033[2J");		//æ¸…å±
+	printf("\033[?25h");	//æ˜¾ç¤ºå…‰æ ‡
 	g_timeout=1;
 
 #endif
 
-/*²úÉúĞ¡Ëæ»úÊı*/
+/*äº§ç”Ÿå°éšæœºæ•°*/
 #if 0
 #define x 3
 #define y 4

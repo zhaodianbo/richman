@@ -91,7 +91,7 @@ void get_prev_pos(int *x,int *y)
 		
 }
 
-//¥”µ±«∞(x,y)œÚ«∞ªÚœÚ∫Û◊ﬂn≤Ω µ√µΩ–¬µƒ(x,y)
+//‰ªéÂΩìÂâç(x,y)ÂêëÂâçÊàñÂêëÂêéËµ∞nÊ≠• ÂæóÂà∞Êñ∞ÁöÑ(x,y)
 void get_n_pos(int n,int *x,int *y)
 {
 	if(n>=0)
@@ -102,7 +102,7 @@ void get_n_pos(int n,int *x,int *y)
 			get_prev_pos(x,y);
 }
 
-//≥ı ºªØµÿÕº µ±«∞Œª÷√Œ™(0,0)
+//ÂàùÂßãÂåñÂú∞Âõæ ÂΩìÂâç‰ΩçÁΩÆ‰∏∫(0,0)
 st_map_info * init_map_info()
 {
 	st_map_info *p=NULL;
@@ -123,29 +123,29 @@ void deinit_map_info(st_map_info **p)
 	*p=NULL;
 }
 
-//…Ë÷√µÿÕº…œµƒµ±«∞Œª÷√
+//ËÆæÁΩÆÂú∞Âõæ‰∏äÁöÑÂΩìÂâç‰ΩçÁΩÆ
 void set_map_cur(st_map_info *p,int x,int y)
 {
 	if(p->map[x][y]==' ' || x<0 ||x >=HEIGHT || 
-		y<0 || y>= WIDTH) return; //∑«∑®Œª÷√ …Ë÷√ ß∞‹
+		y<0 || y>= WIDTH) return; //ÈùûÊ≥ï‰ΩçÁΩÆ ËÆæÁΩÆÂ§±Ë¥•
 	p->x=x;
 	p->y=y;
 }
 
-//ªÒ»°µÿÕºµ±«∞Œª÷√
+//Ëé∑ÂèñÂú∞ÂõæÂΩìÂâç‰ΩçÁΩÆ
 void get_map_cru(st_map_info *p,int *x,int *y)
 {
 	*x=p->x;
 	*y=p->y;
 }
 
-//…Ë÷√µÿÕº(x,y)‘™Àÿµƒ÷µ
+//ËÆæÁΩÆÂú∞Âõæ(x,y)ÂÖÉÁ¥†ÁöÑÂÄº
 void set_map_e(st_map_info *p,char e,int x,int y)
 {
 	p->map[x][y]=e;	
 }
 
-//ªÒ»°Œª÷√µƒ÷µ
+//Ëé∑Âèñ‰ΩçÁΩÆÁöÑÂÄº
 char get_map_e(st_map_info *p,int x,int y)
 {
 	return p->map[x][y];

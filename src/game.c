@@ -9,9 +9,9 @@ extern int sockfd;
 void put_Block(st_game *,int);
 void meet_Block(st_game *,int);
 
-st_tool tool_tb[MAX_TOOL_NUM]={{'G',"Godwealth",0,500,Green,NeedU2realize,NeedU2realize},	//²ÆÉñ
-							   {'B',"Block",1,200,Red,put_Block,meet_Block},				//Â·ÕÏ
-							   {'C',"Control dice",2,200,Green,NeedU2realize,NeedU2realize},//Ò£¿Ø÷»×Ó
+st_tool tool_tb[MAX_TOOL_NUM]={{'G',"Godwealth",0,500,Green,NeedU2realize,NeedU2realize},	//è´¢ç¥
+							   {'B',"Block",1,200,Red,put_Block,meet_Block},				//è·¯éšœ
+							   {'C',"Control dice",2,200,Green,NeedU2realize,NeedU2realize},//é¥æ§éª°å­
 							   {'\0',"",0,0,0,NULL,NULL},
 							  };
 
@@ -27,7 +27,7 @@ st_land_info init_land_st={
 	symbol:0,
 };
 
-//³õÊ¼»¯ÓÎÏ·½á¹¹Ìå °üÀ¨Íæ¼Ò£¬µØÍ¼¼°µØ¿éĞÅÏ¢
+//åˆå§‹åŒ–æ¸¸æˆç»“æ„ä½“ åŒ…æ‹¬ç©å®¶ï¼Œåœ°å›¾åŠåœ°å—ä¿¡æ¯
 st_game * init_game(int player_num)
 {
 	st_game *p=malloc(sizeof(st_game));
@@ -54,7 +54,7 @@ init_player_fail:
 	return NULL;		
 }
 
-//½áÊøÓÎÏ·Ê±Ïú»ÙÓÎÏ·½á¹¹Ìå ÊÍ·ÅÏà¹Ø¿Õ¼ä
+//ç»“æŸæ¸¸æˆæ—¶é”€æ¯æ¸¸æˆç»“æ„ä½“ é‡Šæ”¾ç›¸å…³ç©ºé—´
 void deinit_game(st_game **p)
 {
 	if(*p==NULL) return;
@@ -69,8 +69,8 @@ void deinit_game(st_game **p)
 
 
 
-//´òÓ¡µØÍ¼
-/*ÓĞ´ıÓÅ»¯
+//æ‰“å°åœ°å›¾
+/*æœ‰å¾…ä¼˜åŒ–
 *aaaaaaa*
 *a     a*
 *a     a*
@@ -88,14 +88,14 @@ void print_map_line(int num,int flag)
 }
 
 
-/*Ê×ÏÈÅĞ¶ÏlandÖĞµÄsymbolÊÇ·ñÓĞ·ûºÅÈç¹ûÓĞ£¬´òÓ¡landÖĞµÄÁÙÊ±symbol£¬·ñÔò´òÓ¡µØÍ¼ÔªËØ:
-  µØÍ¼ÊÇĞÎ×´
+/*é¦–å…ˆåˆ¤æ–­landä¸­çš„symbolæ˜¯å¦æœ‰ç¬¦å·å¦‚æœæœ‰ï¼Œæ‰“å°landä¸­çš„ä¸´æ—¶symbolï¼Œå¦åˆ™æ‰“å°åœ°å›¾å…ƒç´ :
+  åœ°å›¾æ˜¯å½¢çŠ¶
             aaaa
   		    b  d
   		    cccc
-  Ê×ÏÈ´òÓ¡aĞĞ£¬È»ºó´òÓ¡µÚ¶şĞĞµ½µÚheight-1ĞĞ(´ÓbÁĞ´òµ½dÁĞ)£¬×îºó´òÓ¡cĞĞ,Ã¿ĞĞÇ°ºó¼ÓÉÏ
-  ¿Õ¸ñ£¬ÈÃµØÍ¼ÔÚÖĞ¼äÏÔÊ¾¡£landÊÇÒ»Î¬Êı×é£¬mapÊÇ¶şÎ¬Êı×é£¬¿É¿´³É½«landÎ§ÈÆÔÚmapµÄËÄÖÜ
-  £¬ËûÃÇµÄË÷ÒıÓĞÒ»¶¨µÄ¶ÔÓ¦¹ØÏµ£¬Ò²ÊÇ·Ö³ÉËÄ²¿·Ö¡£
+  é¦–å…ˆæ‰“å°aè¡Œï¼Œç„¶åæ‰“å°ç¬¬äºŒè¡Œåˆ°ç¬¬height-1è¡Œ(ä»båˆ—æ‰“åˆ°dåˆ—)ï¼Œæœ€åæ‰“å°cè¡Œ,æ¯è¡Œå‰ååŠ ä¸Š
+  ç©ºæ ¼ï¼Œè®©åœ°å›¾åœ¨ä¸­é—´æ˜¾ç¤ºã€‚landæ˜¯ä¸€ç»´æ•°ç»„ï¼Œmapæ˜¯äºŒç»´æ•°ç»„ï¼Œå¯çœ‹æˆå°†landå›´ç»•åœ¨mapçš„å››å‘¨
+  ï¼Œä»–ä»¬çš„ç´¢å¼•æœ‰ä¸€å®šçš„å¯¹åº”å…³ç³»ï¼Œä¹Ÿæ˜¯åˆ†æˆå››éƒ¨åˆ†ã€‚
 */
 void print_game_map(st_game *p)
 {
@@ -105,12 +105,12 @@ void print_game_map(st_game *p)
 	if(p==NULL) return;
 	print_map_line(window_col()/2-WIDTH/2,0);
 	for(i=j=0;j<WIDTH;j++)
-		if(get_land_symbol(pland+j)!=0)	//Èç¹ûlandÖĞÓĞĞèÒªÏÔÊ¾µÄ·ûºÅ ÔòÏÔÊ¾
+		if(get_land_symbol(pland+j)!=0)	//å¦‚æœlandä¸­æœ‰éœ€è¦æ˜¾ç¤ºçš„ç¬¦å· åˆ™æ˜¾ç¤º
 			print_land(p,j);
 		else
-			print_color(get_map_e(pmap,i,j),get_land_ownclor(pland+j));//´òÓ¡µÚÒ»ĞĞa
+			print_color(get_map_e(pmap,i,j),get_land_ownclor(pland+j));//æ‰“å°ç¬¬ä¸€è¡Œa
 	print_map_line(window_col()/2-WIDTH+WIDTH/2,1);
-	//´òÓ¡ÖĞ¼äÓĞ¿Õ¸ñµÄa
+	//æ‰“å°ä¸­é—´æœ‰ç©ºæ ¼çš„a
 	for(i=1,j=0;i<HEIGHT-1;i++)
 	{
 		k=WIDTH-2;
@@ -118,13 +118,13 @@ void print_game_map(st_game *p)
 		if(get_land_symbol(get_game_land(p,LAND_NUM-i))!=0)
 			print_land(p,LAND_NUM-i);
 		else
-			print_color(get_map_e(pmap,i,0),get_land_ownclor(pland+LAND_NUM-i));//´òÓ¡µÚÒ»ÁĞ
+			print_color(get_map_e(pmap,i,0),get_land_ownclor(pland+LAND_NUM-i));//æ‰“å°ç¬¬ä¸€åˆ—
 		while((k--)>0)
 			printf(" ");
 		if(get_land_symbol(get_game_land(p,WIDTH+i-1))!=0)
 			print_land(p,WIDTH+i-1);
 		else
-			print_color(p->p_map->map[i][WIDTH-1],(p->p_land[WIDTH+i-1]).owner_color);//´òÓ¡×îºóÒ»ÁĞ
+			print_color(p->p_map->map[i][WIDTH-1],(p->p_land[WIDTH+i-1]).owner_color);//æ‰“å°æœ€åä¸€åˆ—
 		print_map_line(window_col()/2-WIDTH+WIDTH/2,1);
 	}
 
@@ -133,21 +133,21 @@ void print_game_map(st_game *p)
 		if(get_land_symbol(get_game_land(p,LAND_NUM-i-j))!=0)
 			print_land(p,LAND_NUM-i-j);
 		else	
-			print_color(p->p_map->map[i][j],(p->p_land[LAND_NUM-i-j]).owner_color);//´òÓ¡×îºóÒ»ĞĞa	
+			print_color(p->p_map->map[i][j],(p->p_land[LAND_NUM-i-j]).owner_color);//æ‰“å°æœ€åä¸€è¡Œa	
 	print_map_line(window_col()/2-WIDTH+WIDTH/2,1);	
 
 }
 
 
 
-//ÏÔÊ¾µØÍ¼ÉÏµÄÍæ¼Ò µ±Íæ¼ÒÖØµşÊ±£¬ÏÔÊ¾µ±Ç°Íæ¼Ò
-//ÇĞ»»Íæ¼ÒºóÊ¹ÓÃupdate_map(game,0),ÏÔÊ¾µ±Ç°Íæ¼Ò
+//æ˜¾ç¤ºåœ°å›¾ä¸Šçš„ç©å®¶ å½“ç©å®¶é‡å æ—¶ï¼Œæ˜¾ç¤ºå½“å‰ç©å®¶
+//åˆ‡æ¢ç©å®¶åä½¿ç”¨update_map(game,0),æ˜¾ç¤ºå½“å‰ç©å®¶
 int update_map(st_game *p,int n)
 {
 	int i=0,tmp;
 	int player_num=get_game_pnum(p);
 	st_land_info *land;
-	//¸üĞÂ³ıµ±Ç°Íæ¼ÒÍâ¸÷Íæ¼ÒµÄµØÍ¼ÏÔÊ¾ ÒòÎªÍæ¼ÒÒÆ¶¯ºó¿ÉÄÜÇå³ıÆäËüÍæ¼Ò·ûºÅ
+	//æ›´æ–°é™¤å½“å‰ç©å®¶å¤–å„ç©å®¶çš„åœ°å›¾æ˜¾ç¤º å› ä¸ºç©å®¶ç§»åŠ¨åå¯èƒ½æ¸…é™¤å…¶å®ƒç©å®¶ç¬¦å·
 	for(;i<player_num-1;i++)
 	{
 		st_player *player=get_playern(p,(get_p_id(p)+i+1)%player_num);
@@ -157,37 +157,37 @@ int update_map(st_game *p,int n)
 		set_land_color(land,get_player_color(player));
 	}
 
-	//¸üĞÂµ±Ç°Íæ¼ÒµÄÏÔÊ¾
-	int step=get_p_step(p);	//ÏÖÔÚÍæ¼ÒµÄ²½Êı
+	//æ›´æ–°å½“å‰ç©å®¶çš„æ˜¾ç¤º
+	int step=get_p_step(p);	//ç°åœ¨ç©å®¶çš„æ­¥æ•°
 	land=get_game_land(p,step);
-	if(get_land_symbol(land)== get_p_symbol(p))	//Èç¹ûµ±Ç°Î»ÖÃÖ»ÓĞ×Ô¼º Ôò»Ö¸´ÎªÎŞ
+	if(get_land_symbol(land)== get_p_symbol(p))	//å¦‚æœå½“å‰ä½ç½®åªæœ‰è‡ªå·± åˆ™æ¢å¤ä¸ºæ— 
 	{
-		set_land_symbol(land,0);	//Çå³ılandÉÏµÄ·ûºÅ
-		set_land_color(land,None);	//Çå³ılandµÄÑÕÉ«
+		set_land_symbol(land,0);	//æ¸…é™¤landä¸Šçš„ç¬¦å·
+		set_land_color(land,None);	//æ¸…é™¤landçš„é¢œè‰²
 	}
 
-	int new_step=(n+step>=0) ? (n+step)%LAND_NUM : (LAND_NUM+(n+step)%LAND_NUM);  //¸ºÊıÄ£³ı ÓĞĞ©±àÒëÆ÷ÎªÕı gccÎª¸ºÊı
+	int new_step=(n+step>=0) ? (n+step)%LAND_NUM : (LAND_NUM+(n+step)%LAND_NUM);  //è´Ÿæ•°æ¨¡é™¤ æœ‰äº›ç¼–è¯‘å™¨ä¸ºæ­£ gccä¸ºè´Ÿæ•°
 	int x=0,y=0;
-	get_n_pos(new_step,&x,&y);		//´«Èëx=y=0£¬´«³öĞÂ×ø±ê
+	get_n_pos(new_step,&x,&y);		//ä¼ å…¥x=y=0ï¼Œä¼ å‡ºæ–°åæ ‡
 	//printf("x=%d,y=%d,pos=%d\n",x,y,new_step);
-	set_p_pos(p,x,y);				//¸üĞÂÍæ¼ÒµÄ×ø±ê 
-	set_p_step(p,new_step);			//¸üĞÂÍæ¼ÒÏà¶ÔÔ­µã×ß¹ıµÄ²½Êı ÒÔË÷Òıland[]
-	land=get_game_land(p,new_step);	//Íæ¼Ò×ßµ½ĞÂÎ»ÖÃ
-	set_land_symbol(land,get_p_symbol(p));	//ÉèÖÃĞÂÎ»ÖÃlandÉÏÏÔÊ¾µÄ·ûºÅ
-	set_land_color(land,get_p_color(p));	//ÉèÖÃµØ¿éÑÕÉ«
+	set_p_pos(p,x,y);				//æ›´æ–°ç©å®¶çš„åæ ‡ 
+	set_p_step(p,new_step);			//æ›´æ–°ç©å®¶ç›¸å¯¹åŸç‚¹èµ°è¿‡çš„æ­¥æ•° ä»¥ç´¢å¼•land[]
+	land=get_game_land(p,new_step);	//ç©å®¶èµ°åˆ°æ–°ä½ç½®
+	set_land_symbol(land,get_p_symbol(p));	//è®¾ç½®æ–°ä½ç½®landä¸Šæ˜¾ç¤ºçš„ç¬¦å·
+	set_land_color(land,get_p_color(p));	//è®¾ç½®åœ°å—é¢œè‰²
 	return 0;
 }
 
 int buy_land(st_game *game,st_land_info *land)
 {
-	//¼ÆËãÍÁµØ¼ÛÖµ
+	//è®¡ç®—åœŸåœ°ä»·å€¼
 	int x=0,y=0;
 	get_p_pos(game,&x,&y);
 	//st_land_info *land=get_game_land(game,pos);
 	int init_vlaue=get_map_value(game->p_map,x,y);
 	init_vlaue*=100;
-	if(get_land_price(land)!=0) init_vlaue=get_land_price(land);	//¹ºÂòÒÑÍË³öÍæ¼ÒµÄÍÁµØ
-	//ÂòµØ ¸üĞÂland map p->money
+	if(get_land_price(land)!=0) init_vlaue=get_land_price(land);	//è´­ä¹°å·²é€€å‡ºç©å®¶çš„åœŸåœ°
+	//ä¹°åœ° æ›´æ–°land map p->money
 	int money=get_p_money(game);
 	if( money < init_vlaue)
 	{
@@ -211,7 +211,7 @@ int buy_land(st_game *game,st_land_info *land)
 
 int pay_rent(st_game *game,st_land_info *pland)
 {
-	//¼ÆËãÓ¦¸¶×â½ğ
+	//è®¡ç®—åº”ä»˜ç§Ÿé‡‘
 	//int step=get_p_step(game);
 	//st_land_info *pland=get_game_land(game,step);
 	st_player *player_pay=get_player(game);
@@ -236,17 +236,17 @@ int pay_rent(st_game *game,st_land_info *pland)
 	set_player_money(house_owner,get_player_money(house_owner)+rent);
 	return 0;
 		
-	//p1ÆÆ²ú? bankrupt(game,id);
+	//p1ç ´äº§? bankrupt(game,id);
 }
 
 int game_over(st_game *game)
 {
-	//Ö»Ê£Ò»ÈË£¬ÓÎÏ·½áÊø
+	//åªå‰©ä¸€äººï¼Œæ¸¸æˆç»“æŸ
 	//int win_col=window_col();
 	char name[MAX_NAME_LEN+10]={0};
 	sprintf(name,"%s Win",get_p_name(game));
 	print_bar(name,'=',get_p_color(game));
-	//×îºóµÄÍæ¼ÒÔÚtableµÄ0Î»ÖÃ
+	//æœ€åçš„ç©å®¶åœ¨tableçš„0ä½ç½®
 	print_p_info(game,0);
 	print_bar("Game Over!",'=',Red);
 	deinit_game(&game);
@@ -254,17 +254,17 @@ int game_over(st_game *game)
 }
 
 
-//´«ÈëµÄÊÇst_playerÖĞµÄid
+//ä¼ å…¥çš„æ˜¯st_playerä¸­çš„id
 void player_quit(st_game *game,int id)
 {
-	//É¾³ıgameÖĞµÄÖ¸Õë ºó¼ÌµÄÖ¸ÕëÇ°ÒÆ Íæ¼ÒÊı-- 
+	//åˆ é™¤gameä¸­çš„æŒ‡é’ˆ åç»§çš„æŒ‡é’ˆå‰ç§» ç©å®¶æ•°-- 
 	int player_num=get_game_pnum(game);
 	st_player *player;
 	st_land_info *pland=get_game_land(game,0);
 	int i,j,player_id;
 	char msg[MAX_NAME_LEN+64];
 
-	//ÔÚplayertableÖĞ²éÕÒÍæ¼Ò
+	//åœ¨playertableä¸­æŸ¥æ‰¾ç©å®¶
 	for(i=0;i<player_num;i++)
 	{
 		player=get_playern(game,i);
@@ -276,7 +276,7 @@ void player_quit(st_game *game,int id)
 			pland=get_game_land(game,get_player_step(player));
 			set_land_symbol(pland,0);
 			set_land_color(pland,None);
-			//½«ÍÁµØ¹é»¹ÏµÍ³
+			//å°†åœŸåœ°å½’è¿˜ç³»ç»Ÿ
 			pland=get_game_land(game,0);
 			for(j=0;j<LAND_NUM;j++)
 				if(get_land_player(pland+j)!=NULL && get_player_id(get_land_player(pland+j))== player_id)
@@ -286,7 +286,7 @@ void player_quit(st_game *game,int id)
 		}
 	}
 
-	//tableÖĞ×îºóÒ»ÃûÍæ¼Ò²»ÓÃÒÆ¶¯Ö¸Õë£¬Ğè¸üĞÂidÎ»ÖÃ
+	//tableä¸­æœ€åä¸€åç©å®¶ä¸ç”¨ç§»åŠ¨æŒ‡é’ˆï¼Œéœ€æ›´æ–°idä½ç½®
 	if(i==(player_num-1))
 		set_game_id(game,0);
 	else
@@ -341,7 +341,7 @@ void print_game_info(st_player *player,int landnum)
 	printf("\n");
 }
 
-//´òÓ¡player table[index]µÄÍæ¼ÒĞÅÏ¢  idÊÇplayer tableÖĞµÄË÷Òı
+//æ‰“å°player table[index]çš„ç©å®¶ä¿¡æ¯  idæ˜¯player tableä¸­çš„ç´¢å¼•
 void print_p_info(st_game *game,int index)
 {
 	st_land_info *land=get_game_land(game,0);
@@ -349,12 +349,12 @@ void print_p_info(st_game *game,int index)
 	int land_num[MAX_PLAYER_NUM];
 	memset(land_num,0,sizeof(land_num));
 	int i;
-	//¼ÆËãÃ¿¸öÍæ¼ÒµÄÍÁµØÊı
+	//è®¡ç®—æ¯ä¸ªç©å®¶çš„åœŸåœ°æ•°
 	for(i=0;i<LAND_NUM;i++)
 	{
 		player=get_land_player(land+i);
 		if(player!=NULL)
-			land_num[get_player_id(player)]++;//Íæ¼ÒidÎªË÷Òı
+			land_num[get_player_id(player)]++;//ç©å®¶idä¸ºç´¢å¼•
 	}
 
 	if(index==9)//print all player
@@ -443,7 +443,7 @@ void buy_tool(st_game *game)
 	money=get_player_money(player);
 	price=tool_tb[id].price;
 		
-	if(num*price > money)//Ç®²»¹» ÂòĞ¡ÓÚnum¸ö
+	if(num*price > money)//é’±ä¸å¤Ÿ ä¹°å°äºnumä¸ª
 		num=money/price;
 	if(get_player_tlnum(player)+num > MAX_TOOL_NUM)
 		num=MAX_TOOL_NUM-get_player_tlnum(player);
@@ -488,7 +488,7 @@ char * get_tool_name(int id)
 {
 	return tool_tb[id].name;
 }
-//ÏÔÊ¾Íæ¼ÒÓµÓĞµÄµÀ¾ß ÊıÁ¿
+//æ˜¾ç¤ºç©å®¶æ‹¥æœ‰çš„é“å…· æ•°é‡
 void display_mytool(st_player *player)
 {
 	
@@ -530,7 +530,7 @@ void use_tool(st_game *game)
 			
 }	
 #define blockID 1
-//Ïà¶ÔÍæ¼ÒÎ»ÖÃµÄnum·ÅÖÃÂ·ÕÏ
+//ç›¸å¯¹ç©å®¶ä½ç½®çš„numæ”¾ç½®è·¯éšœ
 void put_Block(st_game *game,int x)
 {
 	//int blockID=tool_tb[1].id;
@@ -540,7 +540,7 @@ retry:
 	int num=get_num();
 	if(num>10 || num <-10) goto retry;
 	
-	//ÉèÖÃµØ¿éÏÔÊ¾ µØ¿étool½á¹¹ ÔÚmeettoolÊ±´¥·¢Ïà¹Ø²Ù×÷
+	//è®¾ç½®åœ°å—æ˜¾ç¤º åœ°å—toolç»“æ„ åœ¨meettoolæ—¶è§¦å‘ç›¸å…³æ“ä½œ
 	int step=get_p_step(game);
 	int new_step=(num+step>=0) ? (num+step)%LAND_NUM : (LAND_NUM+(num+step)%LAND_NUM);
 
@@ -558,10 +558,10 @@ retry:
 	printf("player %s put block at %d\n",get_p_name(game),new_step);
 }
 
-//Ì½Ë÷Íæ¼ÒµÄÇ°n²½ÊÇ·ñÓĞÂ·ÕÏ ·µ»ØÓöµ½Â·ÕÏºó×ß¹ıµÄ²½Êı
+//æ¢ç´¢ç©å®¶çš„å‰næ­¥æ˜¯å¦æœ‰è·¯éšœ è¿”å›é‡åˆ°è·¯éšœåèµ°è¿‡çš„æ­¥æ•°
 int explore_block(st_game *game,int n)
 {
-	int current_step=get_p_step(game);//Íæ¼Òµ±Ç°²½Êı
+	int current_step=get_p_step(game);//ç©å®¶å½“å‰æ­¥æ•°
 	st_land_info *land;
 	int i;
 	int onestep=n>=0?1:-1;
@@ -581,13 +581,13 @@ int explore_block(st_game *game,int n)
 	return n;
 }
 
-//Èç¹ûµØÍ¼ÉÏµÄsymbolÊÇ'B' ¾ÍÓöµ½Â·ÕÏ
+//å¦‚æœåœ°å›¾ä¸Šçš„symbolæ˜¯'B' å°±é‡åˆ°è·¯éšœ
 void meet_Block(st_game *game,int n)
 {
 	printf("you meet a block!\n");
 }
 
-//ºÍput_block meet_blockµÄÊµÏÖÀàËÆ
+//å’Œput_block meet_blockçš„å®ç°ç±»ä¼¼
 void NeedU2realize(st_game *game,int n)
 {
 	printf("this function need you to reailize!\n");
@@ -597,10 +597,10 @@ void next_player(st_game *game)
 {
 	int next=(get_game_id(game)+1)%get_game_pnum(game);
 	set_game_id(game,next);
-	char des_buf[MAXLINE]={'x','\n'};//ÓÃ×Ö·û'x'±íÊ¾Í£Ö¹±¾´Î»ØºÏÊäÈë
+	char des_buf[MAXLINE]={'x','\n'};//ç”¨å­—ç¬¦'x'è¡¨ç¤ºåœæ­¢æœ¬æ¬¡å›åˆè¾“å…¥
 	if(sockfd == -1) return;
 	#if 1
-	if(is_notice(sockfd)) //·şÎñÆ÷Í¨Öª 
+	if(is_notice(sockfd)) //æœåŠ¡å™¨é€šçŸ¥ 
 	{
 		printf("next player\n");
 		Writen(sockfd, des_buf, 3);
@@ -616,11 +616,11 @@ void next_player(st_game *game)
 void print_land(st_game *p,int step)
 {
 	st_land_info *land=get_game_land(p,step);
-	print_color(get_land_symbol(land),land->color);//´òÓ¡µØ¿éÁÙÊ±ÔªËØµÄÑÕÉ«
+	print_color(get_land_symbol(land),land->color);//æ‰“å°åœ°å—ä¸´æ—¶å…ƒç´ çš„é¢œè‰²
 }
 
 
-//³õÊ¼»¯µØ¿éĞÅÏ¢
+//åˆå§‹åŒ–åœ°å—ä¿¡æ¯
 void init_land(st_land_info (*p_land)[])
 {
 
@@ -645,33 +645,33 @@ void init_shop(st_map_info *map)
 
 
 
-/****************************¶Ôgame½á¹¹ÌåÖĞland²Ù×÷µÄ·â×°**************************/
+/****************************å¯¹gameç»“æ„ä½“ä¸­landæ“ä½œçš„å°è£…**************************/
 
-//µØ¿é½á¹¹ÌåÏà¹Øº¯Êı
+//åœ°å—ç»“æ„ä½“ç›¸å…³å‡½æ•°
 void set_land_player(st_land_info *land,st_player *p_player)
 {
 	land->p_player=p_player;
 }
 
-//»ñÈ¡ÍÁµØµÄËùÓĞÕß
+//è·å–åœŸåœ°çš„æ‰€æœ‰è€…
 st_player * get_land_player(st_land_info *land)
 {
 	return land->p_player;
 }
 
-//ÉèÖÃÍÁµØÑÕÉ«
+//è®¾ç½®åœŸåœ°é¢œè‰²
 void set_land_color(st_land_info *land,e_color color)
 {
 	land->color=color;
 }
 
-//»ñÈ¡ÍÁµØÑÕÉ«
+//è·å–åœŸåœ°é¢œè‰²
 e_color get_land_color(st_land_info *land)
 {
 	return land->color;
 }
 
-//ÉèÖÃÍÁµØ¼Û¸ñ
+//è®¾ç½®åœŸåœ°ä»·æ ¼
 void set_land_price(st_land_info *land,int price)
 {
 	land->price=price;
@@ -682,7 +682,7 @@ int get_land_price(st_land_info *land)
 	return land->price;
 }
 
-//ÉèÖÃÍÁµØµÈ¼¶
+//è®¾ç½®åœŸåœ°ç­‰çº§
 void set_land_level(st_land_info *land,House_type level)
 {
 	land->level=level;
@@ -693,13 +693,13 @@ House_type get_land_level(st_land_info *land)
 	return land->level;
 }
 
-//»ñÈ¡µÚstep¿éÍÁµØ
+//è·å–ç¬¬stepå—åœŸåœ°
 st_land_info * get_game_land(st_game *p,int step)
 {
 	return p->p_land+step;
 }
 
-//ÉèÖÃÍÁµØÁÙÊ±ÏÔÊ¾·ûºÅ
+//è®¾ç½®åœŸåœ°ä¸´æ—¶æ˜¾ç¤ºç¬¦å·
 void set_land_symbol(st_land_info *land,char symbol)
 {
 	land->symbol=symbol;
@@ -710,7 +710,7 @@ char get_land_symbol(st_land_info *land)
 	return land->symbol;
 }
 
-//µØ¿éÑÕÉ«ºÍËùÓĞÕßÒ»ÖÂ
+//åœ°å—é¢œè‰²å’Œæ‰€æœ‰è€…ä¸€è‡´
 e_color get_land_ownclor(st_land_info *land)
 {
 	return land->owner_color;
@@ -721,7 +721,7 @@ void set_land_ownclor(st_land_info *land,e_color color)
 	land->owner_color=color;
 }
 
-//»ñÈ¡ÍÁµØÉÏµÀ¾ßµÄÊıÁ¿
+//è·å–åœŸåœ°ä¸Šé“å…·çš„æ•°é‡
 int get_land_tlnum(st_land_info *land)
 {
 	return land->tool_n;
@@ -731,7 +731,7 @@ void set_land_tlnum(st_land_info *land,int num)
 	land->tool_n=num;
 }
 
-//ÉèÖÃÍÁµØÉÏµÄµÚindexµÄµÀ¾ß±àºÅid
+//è®¾ç½®åœŸåœ°ä¸Šçš„ç¬¬indexçš„é“å…·ç¼–å·id
 void set_land_tln(st_land_info *land,int index,int id)
 {
 	land->tools[index]=id;
@@ -741,7 +741,7 @@ int get_land_tln(st_land_info *land,int index)
 	return land->tools[index];
 }
 
-//ÔÚÍÁµØÉÏÔö¼ÓµÀ¾ß
+//åœ¨åœŸåœ°ä¸Šå¢åŠ é“å…·
 void add_land_tool(st_land_info *land,int id)
 {
 	int num=get_land_tlnum(land);	
@@ -752,52 +752,52 @@ void add_land_tool(st_land_info *land,int id)
 }
 
 
-/****************************¶Ôgame½á¹¹ÌåÖĞplayer²Ù×÷µÄ·â×°**************************/
+/****************************å¯¹gameç»“æ„ä½“ä¸­playeræ“ä½œçš„å°è£…**************************/
 
-//»ñÈ¡Íæ¼ÒÃû×Ö linuxÏÂÖÕ¶ËÔİÊ±²»ÄÜÏÔÊ¾ÖĞÎÄ
+//è·å–ç©å®¶åå­— linuxä¸‹ç»ˆç«¯æš‚æ—¶ä¸èƒ½æ˜¾ç¤ºä¸­æ–‡
 char * get_p_name(st_game *p)
 {
 	return get_player_name((p->p_player_tab)[p->id]);
 }
 
-//»ñÈ¡Íæ¼Òid
+//è·å–ç©å®¶id
 int get_p_id(st_game *p)
 {
 	return get_player_id((p->p_player_tab)[p->id]);
 }
 
-//»ñÈ¡Íæ¼ÒµØÍ¼ÉÏµÄÎ»ÖÃ
+//è·å–ç©å®¶åœ°å›¾ä¸Šçš„ä½ç½®
 void get_p_pos(st_game *p,int *x,int *y)
 {
 	get_player_pos((p->p_player_tab)[p->id],x,y);
 }
 
-//ÉèÖÃÍæ¼ÒÎ»ÖÃ
+//è®¾ç½®ç©å®¶ä½ç½®
 void set_p_pos(st_game *p,int x,int y)
 {
 	set_player_pos((p->p_player_tab)[p->id],x,y);	
 }
 
-//»ñÈ¡Íæ¼Ò½ğÇ®Êı
+//è·å–ç©å®¶é‡‘é’±æ•°
 int get_p_money(st_game *p)
 {
 	return get_player_money((p->p_player_tab)[p->id]);	
 }
 
 
-//ÉèÖÃÍæ¼Ò½ğÇ®
+//è®¾ç½®ç©å®¶é‡‘é’±
 void set_p_money(st_game *p,int money)
 {
 	set_player_money((p->p_player_tab)[p->id],money);
 }
 
-//»ñÈ¡Íæ¼ÒµØÍ¼ÉÏµÄ±êÖ¾
+//è·å–ç©å®¶åœ°å›¾ä¸Šçš„æ ‡å¿—
 char get_p_symbol(st_game *p)
 {
 	return get_player_symbol((p->p_player_tab)[p->id]);	
 }
 
-//»ñÈ¡Íæ¼ÒÏà¶ÔÏà¶ÔÆğµãµÄ²½Êı
+//è·å–ç©å®¶ç›¸å¯¹ç›¸å¯¹èµ·ç‚¹çš„æ­¥æ•°
 int get_p_step(st_game *p)
 {
 	return get_player_step((p->p_player_tab)[p->id]);
@@ -808,68 +808,68 @@ void set_p_step(st_game *p,int step)
 	set_player_step((p->p_player_tab)[p->id],step);	
 }
 
-//»ñÈ¡Íæ¼ÒÑÕÉ«
+//è·å–ç©å®¶é¢œè‰²
 e_color get_p_color(st_game *p)
 {
 	return get_player_color((p->p_player_tab)[p->id]);	
 }
 
-//»ñÈ¡µ±Ç°Íæ¼ÒÖ¸Õë
+//è·å–å½“å‰ç©å®¶æŒ‡é’ˆ
 st_player *get_player(st_game *p)
 {
 	return (p->p_player_tab)[p->id];
 }
 
-//»ñÈ¡Íæ¼Ò±íÖĞµÚindex¸öÍæ¼ÒµÄÖ¸Õë
+//è·å–ç©å®¶è¡¨ä¸­ç¬¬indexä¸ªç©å®¶çš„æŒ‡é’ˆ
 st_player *get_playern(st_game *p,int id)
 {
 	return (p->p_player_tab)[id];
 }
 
-//»ñÈ¡µ±Ç°p_player_tab[]ÖĞµÄË÷ÒıºÅ
+//è·å–å½“å‰p_player_tab[]ä¸­çš„ç´¢å¼•å·
 int get_game_id(st_game *p)
 {
 	return p->id;
 }
 
-//ÉèÖÃµ±Ç°Íæ¼Ò±íË÷ÒıºÅ
+//è®¾ç½®å½“å‰ç©å®¶è¡¨ç´¢å¼•å·
 void set_game_id(st_game *p,int id)
 {
 	p->id=id;
 }
 
-//»ñÈ¡Íæ¼ÒÊıÁ¿
+//è·å–ç©å®¶æ•°é‡
 int get_game_pnum(st_game *p)
 {
 	return p->player_num;
 }
 
-//ÉèÖÃÍæ¼ÒÊıÁ¿
+//è®¾ç½®ç©å®¶æ•°é‡
 void set_game_pnum(st_game *p,int num)
 {
 	p->player_num=num;
 }
 
-//ÅĞ¶ÏÊÇ·ñÂÖµ½×Ô¼º
+//åˆ¤æ–­æ˜¯å¦è½®åˆ°è‡ªå·±
 int is_myturn(st_game *p)
 {
 	if(sockfd==-1) return 1;
 	return p->my_turnflag;
 }
 
-//Çå³şturn±êÖ¾
+//æ¸…æ¥šturnæ ‡å¿—
 void clear_turnflag(st_game *p)
 {
 	set_game_turn(p,0);
 }
 
-//ÉèÖÃturn±êÖ¾
+//è®¾ç½®turnæ ‡å¿—
 void set_game_turn(st_game *p,int turn)
 {
 	p->my_turnflag=turn;
 }
 
-//´òÓ¡µ±Ç°Íæ¼ÒÃû×Ö
+//æ‰“å°å½“å‰ç©å®¶åå­—
 void print_name(st_game *p)
 {
 	print_color_str(get_p_name(p),get_p_color(p));

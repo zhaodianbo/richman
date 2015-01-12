@@ -7,15 +7,15 @@
 #include"util.h"
 #define MAX_TOOL_NUM 10
 typedef struct player{
-	char symbol;	//Íæ¼ÒÔÚµØÍ¼ÉÏµÄ±êÖ¾
-	char *name;		//Íæ¼ÒµÄÃû×Ö
-	int id;			//Íæ¼Òid
-	int x,y;		//Íæ¼ÒÔÚµØÍ¼ÉÏµÄÎ»ÖÃpos	
-	int money;		//Íæ¼Ò½ğÇ®Êı
-	int step;		//Íæ¼ÒÔÚµØÍ¼Ïà¶ÔÆğµãµÄ²½Êı
-	e_color color;	//Íæ¼ÒÑÕÉ«
-	int tool_num;	//Íæ¼ÒµÀ¾ßÊıÁ¿
-	int tool_table[MAX_TOOL_NUM];//´æ´¢µÀ¾ßid
+	char symbol;	//ç©å®¶åœ¨åœ°å›¾ä¸Šçš„æ ‡å¿—
+	char *name;		//ç©å®¶çš„åå­—
+	int id;			//ç©å®¶id
+	int x,y;		//ç©å®¶åœ¨åœ°å›¾ä¸Šçš„ä½ç½®pos	
+	int money;		//ç©å®¶é‡‘é’±æ•°
+	int step;		//ç©å®¶åœ¨åœ°å›¾ç›¸å¯¹èµ·ç‚¹çš„æ­¥æ•°
+	e_color color;	//ç©å®¶é¢œè‰²
+	int tool_num;	//ç©å®¶é“å…·æ•°é‡
+	int tool_table[MAX_TOOL_NUM];//å­˜å‚¨é“å…·id
 }st_player;
 
 int  get_player_step(st_player *p);
@@ -32,7 +32,7 @@ char *get_player_name(st_player *p);
 st_player *init_player(int id);
 e_color get_player_color(st_player *p);
 
-//µÀ¾ßÏà¹Ø
+//é“å…·ç›¸å…³
 int get_player_tln(st_player *p,int index);
 int get_player_tlnum(st_player *p);
 void init_player_tool(st_player *p);

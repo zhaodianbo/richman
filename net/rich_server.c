@@ -1,18 +1,18 @@
 /* server.c */
 /*
- * v0.1 ·şÎñÆ÷ºÍ¿Í»§¶Ë³ÌĞò£¬·şÎñÆ÷¶ËÍ¨ÖªÖ¸¶¨¿Í»§¶ËÉÏ´«Ö¸Áî£¬½ÓÊÕºó°Ñcmd¹ã²¥¸øÃ¿¸ö¿Í»§¶Ë
- * 		µ±½ÓÊÕµ½×Ö·û'x'ºóÇĞ»»¿Í»§¶ËË÷ÒıºÅ
+ * v0.1 æœåŠ¡å™¨å’Œå®¢æˆ·ç«¯ç¨‹åºï¼ŒæœåŠ¡å™¨ç«¯é€šçŸ¥æŒ‡å®šå®¢æˆ·ç«¯ä¸Šä¼ æŒ‡ä»¤ï¼Œæ¥æ”¶åæŠŠcmdå¹¿æ’­ç»™æ¯ä¸ªå®¢æˆ·ç«¯
+ * 		å½“æ¥æ”¶åˆ°å­—ç¬¦'x'ååˆ‡æ¢å®¢æˆ·ç«¯ç´¢å¼•å·
 */
 
-/*ËµÃ÷
+/*è¯´æ˜
 step	server		  			client
-  1		write to N 		--->	 read  		·şÎñÆ÷Í¨ÖªÖ¸¶¨¿Í»§NÏìÓ¦  ËùÓĞ¿Í»§¶Ëread£¬
-  2		read from N		<--- 	N write 	¿Í»§¶ËNÏìÓ¦£¬½«Êı¾İÉÏ´«£¬ÆäËû¿Í»§µÈ´ıÏÂÔØ
-  3  	write to All	--->	 read  		ËùÓĞ¿Í»§¶ËÏÂÔØÊı¾İ
+  1		write to N 		--->	 read  		æœåŠ¡å™¨é€šçŸ¥æŒ‡å®šå®¢æˆ·Nå“åº”  æ‰€æœ‰å®¢æˆ·ç«¯readï¼Œ
+  2		read from N		<--- 	N write 	å®¢æˆ·ç«¯Nå“åº”ï¼Œå°†æ•°æ®ä¸Šä¼ ï¼Œå…¶ä»–å®¢æˆ·ç­‰å¾…ä¸‹è½½
+  3  	write to All	--->	 read  		æ‰€æœ‰å®¢æˆ·ç«¯ä¸‹è½½æ•°æ®
     	... ...
     	
-  		ÖØ¸´1 2 3,Èç¹ûNÉÏ´«µÄÊı¾İÊ×Îª'x'£¬´ú±í½áÊø£¬·şÎñÆ÷ÇĞ»»Í¨ÖªN+1ÏìÓ¦
-		Èç¹ûstep2ÖĞ¿Í»§N¶Ï¿ªÁ¬½Ó£¬ÔòÊ¹ÓÃdel_clientÉ¾³ı¸Ãsockfd
+  		é‡å¤1 2 3,å¦‚æœNä¸Šä¼ çš„æ•°æ®é¦–ä¸º'x'ï¼Œä»£è¡¨ç»“æŸï¼ŒæœåŠ¡å™¨åˆ‡æ¢é€šçŸ¥N+1å“åº”
+		å¦‚æœstep2ä¸­å®¢æˆ·Næ–­å¼€è¿æ¥ï¼Œåˆ™ä½¿ç”¨del_clientåˆ é™¤è¯¥sockfd
 */
 
 
@@ -51,7 +51,7 @@ int main(int argc, char **argv)
 	g_currentIndex=0;
 	init_server();
 	TELL_PARENT(getppid());
-	wait_client(*argv[1]);//*argv[1]´ú±íÈËÊı
+	wait_client(*argv[1]);//*argv[1]ä»£è¡¨äººæ•°
 	printf("You can begin the game!\n");
 	server_run();
 	return 0;
@@ -59,8 +59,8 @@ int main(int argc, char **argv)
 #endif
 
 
-/*²¶»ñwrite²»³É¹¦Ê±²úÉúµÄsigpipeĞÅºÅ
- *write²»³É¹¦ÊÇÓÉÓÚ¶Ô·½Á´½Ó¹Ø±ÕÒıÆğµÄ 
+/*æ•è·writeä¸æˆåŠŸæ—¶äº§ç”Ÿçš„sigpipeä¿¡å·
+ *writeä¸æˆåŠŸæ˜¯ç”±äºå¯¹æ–¹é“¾æ¥å…³é—­å¼•èµ·çš„ 
 */
 static void
 write_err(int signo)
@@ -111,7 +111,7 @@ int wait_client(int num)
 	socklen_t cliaddr_len;
 	struct sockaddr_in	cliaddr;
 	char str[INET_ADDRSTRLEN];
-	for(client_num=0;client_num < num;)//µÈ´ıÆäËû2¸ö¿Í»§¶ËÁ¬½Ó
+	for(client_num=0;client_num < num;)//ç­‰å¾…å…¶ä»–2ä¸ªå®¢æˆ·ç«¯è¿æ¥
 	{
 		rset = allset;	/* structure assignment */
 		nready = select(maxfd+1, &rset, NULL, NULL, NULL);
@@ -157,8 +157,8 @@ int wait_client(int num)
 
 
 /*
- * ¿Í»§¶ËºÍ·şÎñÆ÷½¨Á¢Á¬½Óºó£¬ËùÓĞ¿Í»§¶ËµÈ´ı·şÎñÆ÷Í¨Öª
- * ·şÎñÆ÷Ö»Ïòµ±Ç°±»¼¤»îµÄ¿Í»§¶Ë½ÓÊÕÊı¾İ
+ * å®¢æˆ·ç«¯å’ŒæœåŠ¡å™¨å»ºç«‹è¿æ¥åï¼Œæ‰€æœ‰å®¢æˆ·ç«¯ç­‰å¾…æœåŠ¡å™¨é€šçŸ¥
+ * æœåŠ¡å™¨åªå‘å½“å‰è¢«æ¿€æ´»çš„å®¢æˆ·ç«¯æ¥æ”¶æ•°æ®
  */
 int server_run(void)
 {
@@ -166,13 +166,13 @@ int server_run(void)
 	char send_buf[MAXLINE];
 	char recv_buf[MAXLINE];
 	int sockfd;
-	player_num=maxi+1;/*maxi=-1 ±íÊ¾ÎŞÁ¬½Ó*/
+	player_num=maxi+1;/*maxi=-1 è¡¨ç¤ºæ— è¿æ¥*/
 	g_currentIndex=0;
 	while(player_num > 0)	
 	{
 	
 		//printf("current index=%d\n",g_currentIndex);
-		sockfd = client[g_currentIndex];//Ö»¶Ôµ±Ç°idµÄÁ¬½Ó´¦Àí
+		sockfd = client[g_currentIndex];//åªå¯¹å½“å‰idçš„è¿æ¥å¤„ç†
 
 		if(sockfd == -1) 
 		{
@@ -184,7 +184,7 @@ int server_run(void)
 					
 		send_buf[0]=g_currentIndex;
 		
-		for(g_index=0; g_index <= maxi; g_index++)		//Í¨ÖªÖ¸¶¨¿Í»§¶Ë·¢ËÍÊı¾İ
+		for(g_index=0; g_index <= maxi; g_index++)		//é€šçŸ¥æŒ‡å®šå®¢æˆ·ç«¯å‘é€æ•°æ®
 			if(client[g_index]!=-1)
 				Writen(client[g_index], send_buf, 1);	
 		
@@ -205,13 +205,13 @@ int server_run(void)
 			{
 				if(client[g_index]!=-1)
 					Writen(client[g_index], send_buf, n);	
-				usleep(1000);	//²âÊÔÖĞÖ»ÓĞÒ»¿éÍø¿¨ ²»¼ÓÑÓÊ±»á¶ªÊ§Êı¾İ
+				usleep(1000);	//æµ‹è¯•ä¸­åªæœ‰ä¸€å—ç½‘å¡ ä¸åŠ å»¶æ—¶ä¼šä¸¢å¤±æ•°æ®
 			}
 		
-			if(recv_buf[0]!='x')	continue;//Èç¹û¿Í»§¶Ë²»·¢ËÍx£¬Ôò¼ÌĞø
+			if(recv_buf[0]!='x')	continue;//å¦‚æœå®¢æˆ·ç«¯ä¸å‘é€xï¼Œåˆ™ç»§ç»­
 		}
 		
-		if(++g_currentIndex > maxi) g_currentIndex=0;	//ÏÂÒ»¸ö¿Í»§	
+		if(++g_currentIndex > maxi) g_currentIndex=0;	//ä¸‹ä¸€ä¸ªå®¢æˆ·	
 
 	}
 	return 0;
@@ -238,7 +238,7 @@ int recv_client(int fd)
 
 }
 #endif
-/*µ±client¶Ï¿ªÁ¬½ÓºóÉ¾³ı¸Ã¿Í»§*/
+/*å½“clientæ–­å¼€è¿æ¥ååˆ é™¤è¯¥å®¢æˆ·*/
 void del_client(int index)
 {
 	int i;

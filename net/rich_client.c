@@ -1,8 +1,8 @@
 /* client.c */
 /*
- * v0.1  ¿Í»§¶ËÊ×ÏÈ¶Ô·şÎñÆ÷·¢ËÍµÄÊı¾İ½øĞĞÅĞ¶Ï£¬ÊÇ·ñÎªÍ¨ÖªÉÏ´«cmd£¬ÈôÊÇÔò»ñÈ¡ÊäÈë²¢ÉÏ´«£¬
- *		 ·ñÔòµÈ´ı·şÎñÆ÷ÏÂ·¢µÄÖ¸Áîcmd¡£
- * v0.2  ĞŞ¸Ädownload_cmd();ÔÚÃüÁî½áÎ²Ìí¼Ó'\0',Ê¹ÓÃÍâ²¿¿Õ¼ä´æ´¢£¬ĞŞ¸Äclient_runµÄ·µ»ØÖµ
+ * v0.1  å®¢æˆ·ç«¯é¦–å…ˆå¯¹æœåŠ¡å™¨å‘é€çš„æ•°æ®è¿›è¡Œåˆ¤æ–­ï¼Œæ˜¯å¦ä¸ºé€šçŸ¥ä¸Šä¼ cmdï¼Œè‹¥æ˜¯åˆ™è·å–è¾“å…¥å¹¶ä¸Šä¼ ï¼Œ
+ *		 å¦åˆ™ç­‰å¾…æœåŠ¡å™¨ä¸‹å‘çš„æŒ‡ä»¤cmdã€‚
+ * v0.2  ä¿®æ”¹download_cmd();åœ¨å‘½ä»¤ç»“å°¾æ·»åŠ '\0',ä½¿ç”¨å¤–éƒ¨ç©ºé—´å­˜å‚¨ï¼Œä¿®æ”¹client_runçš„è¿”å›å€¼
 */
 
 #include <stdio.h>
@@ -38,7 +38,7 @@ int client_run(int sockfd,char *des_buf)
 
 	if(-1==sockfd) return -1;
 	int IsYourturn=0;
-	if(is_notice(sockfd)) //·şÎñÆ÷Í¨Öª 
+	if(is_notice(sockfd)) //æœåŠ¡å™¨é€šçŸ¥ 
 	{
 		upload_cmd(sockfd);
 		IsYourturn=1;
@@ -65,10 +65,10 @@ int init_client(int *PlayerNum)
 	Connect(sockfd, (struct sockaddr *)&servaddr, sizeof(servaddr));
 	
 	char data_rev[2];
-	/*Ö®Ç°ÔÚÕâÀïÓÃÈ«¾ÖµÄrecv_buf[]£¬µ¼ÖÂÖ®ºóÓÃrecv_buf[]µÚÒ»´Î½ÓÊÕµÄÊı¾İ×ÜÊÇÉÙÒ»¸ö*/
-	/*ºóÀ´ÓÃchar *data_revÀ´½ÓÊÕµ¥¸ö×Ö½Ú£¬µ«ÊÇÖ¸ÕëÃ»ÓĞ³õÊ¼»¯£¬µ¼ÖÂ¶Î´íÎó*/
+	/*ä¹‹å‰åœ¨è¿™é‡Œç”¨å…¨å±€çš„recv_buf[]ï¼Œå¯¼è‡´ä¹‹åç”¨recv_buf[]ç¬¬ä¸€æ¬¡æ¥æ”¶çš„æ•°æ®æ€»æ˜¯å°‘ä¸€ä¸ª*/
+	/*åæ¥ç”¨char *data_revæ¥æ¥æ”¶å•ä¸ªå­—èŠ‚ï¼Œä½†æ˜¯æŒ‡é’ˆæ²¡æœ‰åˆå§‹åŒ–ï¼Œå¯¼è‡´æ®µé”™è¯¯*/
 	
-	int n = Read(sockfd, data_rev, 2);/*½ÓÊÕ·şÎñÆ÷·¢À´µÄclient[]µÄË÷ÒıIndex*/
+	int n = Read(sockfd, data_rev, 2);/*æ¥æ”¶æœåŠ¡å™¨å‘æ¥çš„client[]çš„ç´¢å¼•Index*/
 
 	if(n<=0)
 	{
@@ -82,7 +82,7 @@ int init_client(int *PlayerNum)
 	return sockfd;
 }
 
-/*Èç¹û·¢ËÍµÄË÷ÒıºÍ×Ô¼ºµÄË÷ÒıÒ»ÖÂ£¬Ôò±íÊ¾·şÎñÆ÷ÔÚÍ¨Öª×Ô¼º*/
+/*å¦‚æœå‘é€çš„ç´¢å¼•å’Œè‡ªå·±çš„ç´¢å¼•ä¸€è‡´ï¼Œåˆ™è¡¨ç¤ºæœåŠ¡å™¨åœ¨é€šçŸ¥è‡ªå·±*/
 int is_notice(int sockfd)
 {
 	int n;
@@ -97,7 +97,7 @@ int is_notice(int sockfd)
 	return data_rev == clientIndex;
 }
 
-/*»ñÈ¡ÊäÈë ÉÏ´«Ö¸ÁîÊı¾İ*/
+/*è·å–è¾“å…¥ ä¸Šä¼ æŒ‡ä»¤æ•°æ®*/
 int upload_cmd(int sockfd)
 {
 	char send_buf[MAXLINE];
@@ -107,7 +107,7 @@ int upload_cmd(int sockfd)
 	return 0;
 }
 
-/*ÏÂÔØÊı¾İÖ¸Áî*/
+/*ä¸‹è½½æ•°æ®æŒ‡ä»¤*/
 int download_cmd(int sockfd,char *des)
 {
 	int n;
@@ -121,13 +121,13 @@ int download_cmd(int sockfd,char *des)
 	}
 	memcpy(des,recv_buf,sizeof(recv_buf));
 	n=0;
-	while(des[n]!='\n'&& n++ < MAXLINE-1);//ÔİÊ±ÕâÃ´Ğ´
+	while(des[n]!='\n'&& n++ < MAXLINE-1);//æš‚æ—¶è¿™ä¹ˆå†™
 		des[n]='\0';
 	return 0;
 }
 
 #if 1
-/* TELL_*º¯ÊıµÄsignalÊµÏÖ */
+/* TELL_*å‡½æ•°çš„signalå®ç° */
 #include <signal.h>
 #include "error.h"
 static volatile sig_atomic_t sigflag;
