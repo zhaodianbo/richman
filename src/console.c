@@ -1,4 +1,4 @@
-#include <string.h>
+ï»?include <string.h>
 #include "console.h"
 #include "rich_client.h"
 char cmd_line[LINE_MAX];
@@ -18,7 +18,7 @@ int cmd_use_tool(int n, char *c[]);
 st_game *g_game;
 int sockfd=-1;
 
-//ËùÓÐµÄcmdº¯ÊýÔÚÕâÀï×¢²á
+//æ‰€æœ‰çš„cmdå‡½æ•°åœ¨è¿™é‡Œæ³¨å†?
 cmd_tbl_t cmd_tb[CMD_MAX]={{"go",cmd_go},
 						   {"help",cmd_help},
 						   {"exitgame",cmd_exitgame},
@@ -27,7 +27,7 @@ cmd_tbl_t cmd_tb[CMD_MAX]={{"go",cmd_go},
 						   {"roll",cmd_roll},
 						   {"tool",cmd_use_tool},
 				   		  };
-//Ã»ÓÐÓÃµ½
+//æ²¡æœ‰ç”¨åˆ°
 #if 0
 land_ftbl_t land_ftb[MAX_LAND_FUN]={{Na,buy_land},
 									{Owner,buy_land},
@@ -52,10 +52,10 @@ int cmd_go(int n, char *c[])
 	n=explore_block(g_game,n);
 	printf("%s go %d steps.\n",get_p_name(g_game),n);
 	
-	update_map(g_game,n);				//¸üÐÂµØÍ¼ ¸Ä±äÍæ¼ÒÎ»ÖÃÐÅÏ¢
+	update_map(g_game,n);				//æ›´æ–°åœ°å›¾ æ”¹å˜çŽ©å®¶ä½ç½®ä¿¡æ¯
 	print_game_map(g_game);
-	int step=get_p_step(g_game);		//»ñÈ¡Íæ¼ÒlandÉÏµÄÎ»ÖÃ
-	st_land_info *land=get_game_land(g_game,step);	//µÃµ½µÚpos¸öµØ¿é
+	int step=get_p_step(g_game);		//èŽ·å–çŽ©å®¶landä¸Šçš„ä½ç½®
+	st_land_info *land=get_game_land(g_game,step);	//å¾—åˆ°ç¬¬posä¸ªåœ°å?
 	e_LandOwnerType ownertype=whose_land(g_game,land);
 	
 	switch(ownertype)
@@ -93,7 +93,7 @@ int cmd_help(int n, char *c[])
 
 int cmd_exitgame(int n, char *c[])
 {
-//×öºÃ»ØÊÕ¹¤×÷
+//åšå¥½å›žæ”¶å·¥ä½œ
 	deinit_game(&g_game);
 
 	exit(0);
@@ -124,7 +124,7 @@ int cmd_player_info(int n,char *c[])
 	st_player *player;
 	int player_num=get_game_pnum(g_game);
 	printf("please enter the id that you want to query\n");
-	//´òÓ¡Íæ¼ÒÃûºÍidºÅ
+	//æ‰“å°çŽ©å®¶åå’Œidå?
 	for(i=0 ; i < player_num; i++)
 	{
 		player=get_playern(g_game,i);
@@ -137,9 +137,9 @@ int cmd_player_info(int n,char *c[])
 	if(tmp==9)
 		print_p_info(g_game,9);
 	else
-		for(i=0;i<player_num;i++)		//ÊäÈëidÔÚ±íÖÐ¿ÉÕÒµ½
-			if(player_tb[i] == tmp)		//tmpÎªÍæ¼Òid ²é¿´ÊÇ·ñÓÐ¸ÃÍæ¼Ò
-				print_p_info(g_game,i);	//´«ÈëµÄÊÇplayer tableÖÐµÄË÷Òý
+		for(i=0;i<player_num;i++)		//è¾“å…¥idåœ¨è¡¨ä¸­å¯æ‰¾åˆ°
+			if(player_tb[i] == tmp)		//tmpä¸ºçŽ©å®¶id æŸ¥çœ‹æ˜¯å¦æœ‰è¯¥çŽ©å®¶
+				print_p_info(g_game,i);	//ä¼ å…¥çš„æ˜¯player tableä¸­çš„ç´¢å¼•
 	return 0;
 }
 
@@ -147,7 +147,7 @@ int cmd_land_info(int n,char *c[])
 {
 	return 0;
 }
-//»ñÈ¡Ò»ÐÐµÄÄÚÈÝ
+//èŽ·å–ä¸€è¡Œçš„å†…å®¹
 void get_cmd_line(void)
 {
 	if(sockfd !=-1)
@@ -161,20 +161,20 @@ void get_cmd_line(void)
 		int n=0;
 		memset(cmd_line,0,sizeof(cmd_line));
 		while(((cmd_line[n]=getc(stdin))!=EOF) && (cmd_line[n]!='\n') && ((++n) < LINE_MAX) );
-		cmd_line[n]='\0';	//È¥µô»»ÐÐ·ûºÅ
+		cmd_line[n]='\0';	//åŽ»æŽ‰æ¢è¡Œç¬¦å·
 	}
 		#endif
 	//while(cmd_line[n]!='\n' && n++ < LINE_MAX);
 	//	cmd_line[n]='\0';
 	//cmd_line[strlen(cmd_line)-1]='\0';
-	//fgets(cmd_line,LINE_MAX,stdin);	//»»ÐÐ·ûºÅÒ²»á±£´æÏÂÀ´: str\n\0
+	//fgets(cmd_line,LINE_MAX,stdin);	//æ¢è¡Œç¬¦å·ä¹Ÿä¼šä¿å­˜ä¸‹æ¥: str\n\0
 #ifdef AUTO_TEST
 	printf("%s\n",cmd_line);
 
 #endif
 }
 
-//ÔÚÒ»ÐÐÊäÈëÖÐ»ñÈ¡cmdÃüÁî: µÚÒ»¸ö×Ö·û´®
+//åœ¨ä¸€è¡Œè¾“å…¥ä¸­èŽ·å–cmdå‘½ä»¤: ç¬¬ä¸€ä¸ªå­—ç¬¦ä¸²
 void get_cmd()
 {
 	memset(cmd,0,sizeof(cmd));
@@ -194,11 +194,11 @@ int get_num_para()
 	return ret;
 }
 
-//¸ù¾ÝÖÕ¶Ë»ñÈ¡µ½µÄ×Ö·û´®ÕÒµ½¶ÔÓ¦µÄcmd Ö§³Ö²»ÍêÈ«Æ¥Åä
+//æ ¹æ®ç»ˆç«¯èŽ·å–åˆ°çš„å­—ç¬¦ä¸²æ‰¾åˆ°å¯¹åº”çš„cmd æ”¯æŒä¸å®Œå…¨åŒ¹é…?
 /*
-* cmd : ×Ö·û´®Ê×µØÖ·
-* table : Ëù²éÕÒµÄtable
-* table_len : tableÖÐcmdµÄ¸öÊý
+* cmd : å­—ç¬¦ä¸²é¦–åœ°å€
+* table : æ‰€æŸ¥æ‰¾çš„table
+* table_len : tableä¸­cmdçš„ä¸ªæ•?
 */
 cmd_tbl_t *find_cmd_tbl (const char *cmd, cmd_tbl_t *table, int table_len)
 {	
@@ -299,7 +299,7 @@ int init(int net_flag)
 
 	if(net_flag==LOCAL)	goto initgame;
 
-	 //apueÖÐÓÐTELL_WAITµÈº¯Êý½â¾ö½ø³Ì¼äÍ¬²½ÎÊÌâ
+	 //apueä¸­æœ‰TELL_WAITç­‰å‡½æ•°è§£å†³è¿›ç¨‹é—´åŒæ­¥é—®é¢˜
 	if(net_flag==NET_SERVER)
 	{		 
 		pid_t pid;
