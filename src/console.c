@@ -1,4 +1,4 @@
-�?include <string.h>
+#include <string.h>
 #include "console.h"
 #include "rich_client.h"
 char cmd_line[LINE_MAX];
@@ -18,7 +18,7 @@ int cmd_use_tool(int n, char *c[]);
 st_game *g_game;
 int sockfd=-1;
 
-//所有的cmd函数在这里注�?
+//所有的cmd函数在这里注册
 cmd_tbl_t cmd_tb[CMD_MAX]={{"go",cmd_go},
 						   {"help",cmd_help},
 						   {"exitgame",cmd_exitgame},
@@ -55,7 +55,7 @@ int cmd_go(int n, char *c[])
 	update_map(g_game,n);				//更新地图 改变玩家位置信息
 	print_game_map(g_game);
 	int step=get_p_step(g_game);		//获取玩家land上的位置
-	st_land_info *land=get_game_land(g_game,step);	//得到第pos个地�?
+	st_land_info *land=get_game_land(g_game,step);	//得到第pos个地块
 	e_LandOwnerType ownertype=whose_land(g_game,land);
 	
 	switch(ownertype)
@@ -124,7 +124,7 @@ int cmd_player_info(int n,char *c[])
 	st_player *player;
 	int player_num=get_game_pnum(g_game);
 	printf("please enter the id that you want to query\n");
-	//打印玩家名和id�?
+	//打印玩家名和id号
 	for(i=0 ; i < player_num; i++)
 	{
 		player=get_playern(g_game,i);
@@ -194,11 +194,11 @@ int get_num_para()
 	return ret;
 }
 
-//根据终端获取到的字符串找到对应的cmd 支持不完全匹�?
+//根据终端获取到的字符串找到对应的cmd 支持不完全匹配
 /*
 * cmd : 字符串首地址
 * table : 所查找的table
-* table_len : table中cmd的个�?
+* table_len : table中cmd的个数
 */
 cmd_tbl_t *find_cmd_tbl (const char *cmd, cmd_tbl_t *table, int table_len)
 {	
