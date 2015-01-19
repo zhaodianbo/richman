@@ -6,6 +6,7 @@
 #include "rich_client.h"
 extern int sockfd;
 
+
 void put_Block(st_game *,int);
 void meet_Block(st_game *,int);
 
